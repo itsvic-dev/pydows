@@ -1,4 +1,5 @@
-from fluent.views import Notification, Image, Acrylic, LayeredView
+from fluent.views import Image, Acrylic, LayeredView
+from fluent.components import Notification
 
 if __name__ == "__main__":
     notification = Notification(

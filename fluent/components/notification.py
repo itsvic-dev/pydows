@@ -1,8 +1,4 @@
-from .column import Column
-from .view import View
-from .image import Image
-from .text import Text
-from .row import Row
+from fluent.views import Column, View, Image, Text, Row
 from PIL import Image as PILImage, ImageFont
 from os.path import join, dirname
 
