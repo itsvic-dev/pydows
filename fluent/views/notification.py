@@ -22,15 +22,15 @@ class Notification(View):
         if header:
             # construct app header
             header_img = Image(header[0], size=(16, 16))
-            header_text = Text(header[1], font=get_font("segoeui", 13), fill=(255, 255, 255))
+            header_text = Text(header[1], font=get_font("segoeui", 13), fill=(255, 255, 255), anchor="lm")
 
-            header_row = Row(spacing=8, alignment=Row.Alignment.TOP)
+            header_row = Row(spacing=8, alignment=Row.Alignment.CENTER)
             header_row.add_child(header_img)
             header_row.add_child(header_text)
 
             self.column.add_child(header_row)
 
-        toast_body = Column(spacing=2)
+        toast_body = Column(spacing=8)
         if title:
             toast_body.add_child(Text(title, font=get_font("seguisb", 15), fill=(255, 255, 255)))
         if body:
@@ -56,7 +56,7 @@ class Notification(View):
 
         close_img = self._close.paint()
         xy = (
-            image.size[0] - close_img.size[0] - 21,
+            image.size[0] - close_img.size[0] - 22,
             21,
         )
         image.alpha_composite(close_img, xy)
