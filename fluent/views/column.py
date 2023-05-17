@@ -23,7 +23,7 @@ class Column(ViewWithChildren):
         return width, height
 
     def paint(self) -> Image.Image:
-        image = Image.new("RGBA", self.get_size(), color=(0, 0, 0, 0))
+        image = Image.new("RGBA", self.get_size())
 
         # draw children
         x_offset = self.padding[0]

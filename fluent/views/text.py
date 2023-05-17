@@ -4,8 +4,8 @@ from typing import Literal
 
 
 class Text(View):
-    def __init__(self, text: str, font: ImageFont.ImageFont | ImageFont.FreeTypeFont | None = None, fill=(255, 255, 255),
-                 align: Literal["left", "center", "right"] = "left", anchor="lt"):
+    def __init__(self, text: str, font: ImageFont.ImageFont | ImageFont.FreeTypeFont | None = None,
+                 fill=(255, 255, 255), align: Literal["left", "center", "right"] = "left", anchor="lt"):
         super().__init__()
         self.text = text
         self.font = font

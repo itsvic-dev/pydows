@@ -1,10 +1,6 @@
 from fluent.views import Column, View, Image, Text, Row
-from PIL import Image as PILImage, ImageFont
-from os.path import join, dirname
-
-
-def get_font(font: str, size: int):
-    return ImageFont.truetype(join(dirname(__file__), "../assets", font + ".ttf"), size=size)
+from fluent.helpers import get_font
+from PIL import Image as PILImage
 
 
 class Notification(View):
@@ -30,9 +26,9 @@ class Notification(View):
         if title:
             toast_body.add_child(Text(title, font=get_font("seguisb", 15), fill=(255, 255, 255)))
         if body:
-            toast_body.add_child(Text(body, font=get_font("segoeui", 15), fill=(159, 163, 168)))
+            toast_body.add_child(Text(body, font=get_font("segoeui", 15), fill=(192, 192, 192, 192)))
         if subtext:
-            toast_body.add_child(Text(subtext, font=get_font("segoeui", 13), fill=(159, 163, 168)))
+            toast_body.add_child(Text(subtext, font=get_font("segoeui", 13), fill=(192, 192, 192, 192)))
 
         self.column.add_child(toast_body)
 
