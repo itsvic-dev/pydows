@@ -37,6 +37,8 @@ class LayeredView(ViewWithChildren):
             self._raw_child = child
             image.alpha_composite(child["view"].paint().convert("RGBA"), child["xy"])
 
+        self._image = None
+
         return image
 
     def get_custom_property(self, prop: str):

@@ -68,7 +68,8 @@ class Scene:
         self.audio_clips.append(AudioFileClip(file).with_start((self.duration + after_n_frames) / self.fps))
 
     def render(self, file: str, preset="veryslow"):
-        frames = []
+        tmpdir = f"/tmp/" + "".join(random.choices(string.ascii_letters, k=8))
+        os.mkdir(tmpdir)
         for i in tqdm.tqdm(range(self.duration), desc="scene frame rendering", total=self.duration):
             view = LayeredView()
             view.add_child(self.main_view, is_main=True)
@@ -86,12 +87,8 @@ class Scene:
                         position = action.keyframes[-1]
                     view.add_child(action.child, xy=position)
 
-            frames.append(view.paint())
-
-        tmpdir = f"/tmp/" + "".join(random.choices(string.ascii_letters, k=8))
-        os.mkdir(tmpdir)
-        for i, frame in tqdm.tqdm(enumerate(frames), desc=f"saving frames to {tmpdir}", total=len(frames)):
-            frame.save(f"{tmpdir}/{i:05d}.bmp")
+            view.paint().save(f"{tmpdir}/{i:05d}.bmp")
+            del view
 
         clip = ImageSequenceClip(tmpdir, fps=self.fps)
         clip.audio = CompositeAudioClip(self.audio_clips).with_duration(clip.duration)

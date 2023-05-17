@@ -42,9 +42,9 @@ if __name__ == "__main__":
 
     scene.wait_n_frames(30)
 
-    for i in range(10):
+    for i in range(4):
         spawn_notification(bg, scene, notification, frame_offset=i * 10)
 
-    scene.wait_n_frames(100 + 90)
+    scene.wait_n_frames(40 + 90)
 
     scene.render("test.mp4")
