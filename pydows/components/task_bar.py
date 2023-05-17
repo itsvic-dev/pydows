@@ -171,7 +171,6 @@ class TaskBar(View):
             size = self.get_size()
             image = Image.new("RGBA", size)
             icon = self.icon.paint()
-            print(icon.size)
             image.alpha_composite(icon, (3, 11))
             return image
 

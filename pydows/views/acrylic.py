@@ -30,7 +30,7 @@ class Acrylic(View):
     class InvalidParentError(Exception):
         pass
 
-    def __init__(self, view: View, color=(31, 31, 31, 160), blur=64, noise=32):
+    def __init__(self, view: View, color=(31, 31, 31, 160), blur=64, noise=24):
         super().__init__()
         self.child = view
         view.parent = self

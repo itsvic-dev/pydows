@@ -1,6 +1,6 @@
 from PIL import ImageFont, Image
 from os.path import join, dirname
-from .constants import Font
+from .constants import Font, Duration
 
 
 def get_asset(path: str):
@@ -9,6 +9,10 @@ def get_asset(path: str):
 
 def get_font(font: Font, size: int):
     return ImageFont.truetype(get_asset(font.value + ".ttf"), size=size)
+
+
+def get_duration(duration: Duration, fps=60):
+    return round(duration.value * fps)
 
 
 def crop_and_stretch(img: Image.Image, box: tuple[int, int, int, int]):

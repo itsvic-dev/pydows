@@ -28,3 +28,7 @@ class Font(Enum):
     SEGOE_UI_SEMIBOLD = "seguisb"
     SEGOE_MDL2 = "segmdl2"
     HOLOLENS_MDL2 = "holomdl2"
+
+
+class Duration(Enum):
+    NOTIFICATION_SLIDE = 0.8

@@ -42,7 +42,7 @@ class Scene:
             keyframes = []
         if duration is None and len(keyframes) != 0:
             duration = len(keyframes)
-        else:
+        elif duration is None:
             duration = 0
 
         start_frame = self.duration + after_n_frames
@@ -91,7 +91,8 @@ class Scene:
             del view
 
         clip = ImageSequenceClip(tmpdir, fps=self.fps)
-        clip.audio = CompositeAudioClip(self.audio_clips).with_duration(clip.duration)
+        if self.audio_clips:
+            clip.audio = CompositeAudioClip(self.audio_clips).with_duration(clip.duration)
         clip.write_videofile(file, preset=preset)
 
         shutil.rmtree(tmpdir)
