@@ -4,7 +4,7 @@ import shutil
 from enum import Enum
 import string
 import tqdm
-from fluent.views import View, LayeredView
+from pydows.views import View, LayeredView
 from moviepy import ImageSequenceClip, AudioFileClip, CompositeAudioClip
 
 

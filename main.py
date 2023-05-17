@@ -1,6 +1,6 @@
-from fluent.views import Image, CachedView, Acrylic
-from fluent.components import Notification, TaskBar
-from fluent.video import Scene, easing
+from pydows.views import Image, CachedView, Acrylic
+from pydows.components import Notification, TaskBar
+from pydows.video import Scene, easing
 
 
 offset = None
@@ -21,7 +21,7 @@ def spawn_notification(bg: Image, scene: Scene, notification: Acrylic, frame_off
 
     notif_time = round(0.8 * 60)
 
-    scene.play_audio("fluent/assets/sounds/notify.mp3", after_n_frames=frame_offset)
+    scene.play_audio("pydows/assets/sounds/notify.mp3", after_n_frames=frame_offset)
     scene.add_child(notification, keyframes=easing.do_ease(start_pos, end_pos, notif_time, easing.ease_out_expo),
                     duration=0, after_n_frames=frame_offset, is_async=True)
 

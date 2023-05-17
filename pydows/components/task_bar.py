@@ -2,9 +2,9 @@ import datetime
 
 from PIL import Image
 from enum import Enum
-from fluent.helpers import get_font
-from fluent.views import Row, View, Text
-from fluent.constants import HoloMDL2IconMap, SegoeMDL2IconMap
+from pydows.helpers import get_font
+from pydows.views import Row, View, Text
+from pydows.constants import HoloMDL2IconMap, SegoeMDL2IconMap
 
 
 class TaskBar(View):

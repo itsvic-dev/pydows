@@ -1,5 +1,5 @@
-from fluent.views import Column, View, Image, Text, Row
-from fluent.helpers import get_font
+from pydows.views import Column, View, Image, Text, Row
+from pydows.helpers import get_font
 from PIL import Image as PILImage
 
 
