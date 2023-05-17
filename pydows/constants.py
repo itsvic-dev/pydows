@@ -20,3 +20,11 @@ class SegoeMDL2IconMap(Enum):
 
 class AcrylicColors(Enum):
     TASKBAR = (31, 31, 31, 192)
+
+
+class Font(Enum):
+    SEGOE_UI = "segoeui"
+    SEGOE_UI_BOLD = "segoeuib"
+    SEGOE_UI_SEMIBOLD = "seguisb"
+    SEGOE_MDL2 = "segmdl2"
+    HOLOLENS_MDL2 = "holomdl2"
