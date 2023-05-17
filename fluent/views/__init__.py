@@ -1,4 +1,5 @@
 from .view import View
+from .cached_view import CachedView
 
 from .text import Text
 from .image import Image

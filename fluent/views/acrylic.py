@@ -1,6 +1,7 @@
 import random
 from PIL import Image, ImageFilter
 from .view import View
+from ..helpers import crop_and_stretch
 
 
 noise_cache = {}
@@ -29,7 +30,7 @@ class Acrylic(View):
     class InvalidParentError(Exception):
         pass
 
-    def __init__(self, view: View, color=(15, 15, 15, 128), blur=64, noise=16):
+    def __init__(self, view: View, color=(31, 31, 31, 128), blur=64, noise=16):
         super().__init__()
         self.child = view
         view.parent = self
@@ -57,7 +58,7 @@ class Acrylic(View):
 
         # bg blur
         crop = (our_pos[0], our_pos[1], child_image.size[0] + our_pos[0], child_image.size[1] + our_pos[1])
-        image = bg_image.crop(crop).filter(ImageFilter.GaussianBlur(radius=self.blur)).convert("RGBA")
+        image = crop_and_stretch(bg_image, crop).filter(ImageFilter.GaussianBlur(radius=self.blur)).convert("RGBA")
         # noise
         image.paste(Image.new("L", image.size, color=0), (0, 0), noise_layer)
         # final fill
