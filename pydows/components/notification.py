@@ -5,7 +5,7 @@ from PIL import Image as PILImage
 
 class Notification(View):
     def __init__(self, header: tuple[str, str] | None = None, title: str = "", body: str = "", subtext: str = "",
-                 opaque=True):
+                 image: str = "", opaque=True):
         super().__init__()
         self.column = Column(spacing=16, padding=(16, 16))
         self.column.parent = self
@@ -14,7 +14,7 @@ class Notification(View):
         if header:
             # construct app header
             header_img = Image(header[0], size=(16, 16))
-            header_text = Text(header[1], font=get_font("segoeui", 13), fill=(255, 255, 255), anchor="lm")
+            header_text = Text(header[1], font=get_font("segoeui", 13), fill=(255, 255, 255), anchor="lt")
 
             header_row = Row(spacing=8, alignment=Row.Alignment.CENTER)
             header_row.add_child(header_img)
@@ -22,13 +22,19 @@ class Notification(View):
 
             self.column.add_child(header_row)
 
-        toast_body = Column(spacing=8)
+        toast_body = Column(spacing=2)
         if title:
             toast_body.add_child(Text(title, font=get_font("seguisb", 15), fill=(255, 255, 255)))
         if body:
             toast_body.add_child(Text(body, font=get_font("segoeui", 15), fill=(192, 192, 192, 192)))
         if subtext:
             toast_body.add_child(Text(subtext, font=get_font("segoeui", 13), fill=(192, 192, 192, 192)))
+
+        if image:
+            toast_body_new = Row(spacing=16)
+            toast_body_new.add_child(Image(image, (48, 48)))
+            toast_body_new.add_child(toast_body)
+            toast_body = toast_body_new
 
         self.column.add_child(toast_body)
 
