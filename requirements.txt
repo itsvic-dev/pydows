@@ -1,4 +1,4 @@
 git+https://github.com/Zulko/moviepy.git
-Pillow
-numpy
-tqdm
+Pillow~=9.5.0
+numpy~=1.24.3
+tqdm~=4.65.0

@@ -2,8 +2,12 @@ from PIL import ImageFont, Image
 from os.path import join, dirname
 
 
+def get_asset(path: str):
+    return join(dirname(__file__), "assets", path)
+
+
 def get_font(font: str, size: int):
-    return ImageFont.truetype(join(dirname(__file__), "assets", font + ".ttf"), size=size)
+    return ImageFont.truetype(get_asset(font + ".ttf"), size=size)
 
 
 def crop_and_stretch(img: Image.Image, box: tuple[int, int, int, int]):

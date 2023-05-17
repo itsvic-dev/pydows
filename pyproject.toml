@@ -1,0 +1,30 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pydows"
+version = "0.0.1"
+authors = [
+    { name="omame", email="me@omame.xyz" }
+]
+description = "Create Windows 10-styled videos with high quality."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX",
+]
+dependencies = [
+    "moviepy@https://github.com/Zulko/moviepy/archive/69ac313a20f746be3dc14b81b894498f97142c96.zip",
+    "Pillow~=9.5.0",
+    "numpy~=1.24.3",
+    "tqdm~=4.65.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/omametech/pydows"
+"Bug Tracker" = "https://github.com/omametech/pydows/issues"
+
+[tool.hatch.metadata]
+allow-direct-references = true
