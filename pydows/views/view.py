@@ -12,6 +12,8 @@ class View:
         raise NotImplementedError(f"Class {self.__class__.__name__} hasn't implemented method `paint`.")
 
     def get_custom_property(self, prop: str):
+        if self.parent:
+            return self.parent.get_custom_property(prop)
         raise NotImplementedError(f"Class {self.__class__.__name__} hasn't implemented method `get_custom_property`.")
 
 

@@ -30,7 +30,7 @@ class Image(View):
             # new size is taller, center width
             new_x = round((size_pre_crop[0] - new_size[0]) / 2)
             crop = (new_x, 0, new_size[0] + new_x, new_size[1])
-        self._image = pre_crop.crop(crop)
+        self._image = pre_crop.crop(crop).convert("RGBA")
 
     def paint(self) -> PILImage.Image:
         return self._image
