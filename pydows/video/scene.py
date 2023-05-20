@@ -8,14 +8,20 @@ from pydows.views import View, LayeredView
 from moviepy import ImageSequenceClip, AudioFileClip, CompositeAudioClip
 
 
-class Scene:
-    def __init__(self, main_view: View):
+class Scene(View):
+    def __init__(self, main_view: View, offset=0):
+        super().__init__()
         self.main_view = main_view
         self.actions = []
         self.audio_clips = []
         self.duration = 0
         self.fps = 60
+        self._offset = offset
         self._current_frame = -1
+        self._current_start = -1
+
+    def get_size(self) -> tuple[int, int] | tuple[float, float]:
+        return self.main_view.get_size()
 
     class Action:
         class Type(Enum):
@@ -88,6 +94,13 @@ class Scene:
                 view.add_child(action.child, xy=position)
 
         return view.paint()
+
+    def paint(self):
+        if not self.parent:
+            raise NotImplementedError("Scene::paint() requires a parent. Did you mean to use render()?")
+        current_frame = self.parent.get_custom_property("current_frame")
+        frame = (current_frame - self._offset) % self.duration
+        return self._paint(frame)
 
     def render(self, file: str, preset="veryslow"):
         tmpdir = f"/tmp/" + "".join(random.choices(string.ascii_letters, k=8))
