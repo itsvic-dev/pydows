@@ -15,6 +15,7 @@ class Scene:
         self.audio_clips = []
         self.duration = 0
         self.fps = 60
+        self._current_frame = -1
 
     class Action:
         class Type(Enum):
@@ -67,28 +68,32 @@ class Scene:
     def play_audio(self, file: str, after_n_frames=0):
         self.audio_clips.append(AudioFileClip(file).with_start((self.duration + after_n_frames) / self.fps))
 
+    def _paint(self, n: int):
+        self._current_frame = n
+        view = LayeredView()
+        view.parent = self
+        view.add_child(self.main_view, is_main=True)
+
+        for action in self.actions:
+            if not action.applies_to_frame(n):
+                continue
+            if action.child:
+                # get child position
+                position = action.position
+                if action.keyframes and n - action.start_frame < len(action.keyframes):
+                    position = action.keyframes[n - action.start_frame]
+                if not position and action.keyframes:
+                    # use last keyframe as fallback
+                    position = action.keyframes[-1]
+                view.add_child(action.child, xy=position)
+
+        return view.paint()
+
     def render(self, file: str, preset="veryslow"):
         tmpdir = f"/tmp/" + "".join(random.choices(string.ascii_letters, k=8))
         os.mkdir(tmpdir)
         for i in tqdm.tqdm(range(self.duration), desc="scene frame rendering", total=self.duration):
-            view = LayeredView()
-            view.add_child(self.main_view, is_main=True)
-
-            for action in self.actions:
-                if not action.applies_to_frame(i):
-                    continue
-                if action.child:
-                    # get child position
-                    position = action.position
-                    if action.keyframes and i - action.start_frame < len(action.keyframes):
-                        position = action.keyframes[i - action.start_frame]
-                    if not position and action.keyframes:
-                        # use last keyframe as fallback
-                        position = action.keyframes[-1]
-                    view.add_child(action.child, xy=position)
-
-            view.paint().save(f"{tmpdir}/{i:05d}.bmp")
-            del view
+            self._paint(i).save(f"{tmpdir}/{i:05d}.bmp")
 
         clip = ImageSequenceClip(tmpdir, fps=self.fps)
         if self.audio_clips:
@@ -96,3 +101,7 @@ class Scene:
         clip.write_videofile(file, preset=preset)
 
         shutil.rmtree(tmpdir)
+
+    def get_custom_property(self, prop: str):
+        if prop == "current_frame":
+            return self._current_frame

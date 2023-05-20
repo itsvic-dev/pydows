@@ -46,4 +46,6 @@ class LayeredView(ViewWithChildren):
             return self._image
         if prop == "raw_child":
             return self._raw_child
+        if self.parent:
+            return self.parent.get_custom_property(prop)
         raise NotImplementedError(f"Unknown property {prop}")
