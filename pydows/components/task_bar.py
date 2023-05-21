@@ -3,8 +3,8 @@ import datetime
 from PIL import Image
 from enum import Enum
 from pydows.helpers import get_font
-from pydows.views import Row, View, Text
-from pydows.constants import HoloMDL2IconMap, SegoeMDL2IconMap, Font
+from pydows.views import Row, View, Text, Image as ImageView
+from pydows.constants import HoloMDL2IconMap, SegoeMDL2IconMap, Font, Color
 
 
 class TaskBar(View):
@@ -96,6 +96,33 @@ class TaskBar(View):
             # draw icon
             icon = self.icon.paint()
             image.alpha_composite(icon, (16, 12))
+
+            return image
+
+    class ImageApp(View):
+        def __init__(self, icon: str, open=False, selected=False):
+            super().__init__()
+            self.icon = ImageView(icon, (24, 24))
+            self.open = open
+            self.selected = selected
+
+        def get_size(self) -> tuple[int, int] | tuple[float, float]:
+            return 48, 40
+
+        def paint(self) -> Image.Image:
+            image = Image.new("RGBA", self.get_size())
+
+            if self.selected:
+                image.alpha_composite(Image.new("RGBA", image.size, (255, 255, 255, 48)))
+
+            # draw icon
+            icon = self.icon.paint()
+            image.alpha_composite(icon, (12, 8))
+
+            if self.open:
+                size = (40, 2) if not self.selected else (48, 2)
+                pos = (4, 38) if not self.selected else (0, 38)
+                image.alpha_composite(Image.new("RGBA", size, Color.ACCENT_LIGHT.value), pos)
 
             return image
 

@@ -25,6 +25,10 @@ class AcrylicColors(Enum):
     TASKBAR = (31, 31, 31, 192)
 
 
+class Color(Enum):
+    ACCENT_LIGHT = "#76b9ed"
+
+
 class Font(Enum):
     SEGOE_UI = "segoeui"
     SEGOE_UI_BOLD = "segoeuib"
