@@ -1,5 +1,4 @@
 from pydows.views import Column, View, Image, Text, Row
-from pydows.helpers import get_font
 from pydows.constants import Font
 from PIL import Image as PILImage
 
@@ -15,7 +14,7 @@ class Notification(View):
         if header:
             # construct app header
             header_img = Image(header[0], size=(16, 16))
-            header_text = Text(header[1], font=get_font(Font.SEGOE_UI, 13), fill=(255, 255, 255), anchor="lt")
+            header_text = Text(header[1], font=Font.SEGOE_UI, size=13, fill=(255, 255, 255), anchor="lt")
 
             header_row = Row(spacing=8, alignment=Row.Alignment.CENTER)
             header_row.add_child(header_img)
@@ -25,11 +24,11 @@ class Notification(View):
 
         toast_body = Column(spacing=2)
         if title:
-            toast_body.add_child(Text(title, font=get_font(Font.SEGOE_UI_SEMIBOLD, 15), fill=(255, 255, 255)))
+            toast_body.add_child(Text(title, font=Font.SEGOE_UI_SEMIBOLD, size=15, fill=(255, 255, 255)))
         if body:
-            toast_body.add_child(Text(body, font=get_font(Font.SEGOE_UI, 15), fill=(192, 192, 192, 192)))
+            toast_body.add_child(Text(body, font=Font.SEGOE_UI, size=15, fill=(192, 192, 192, 192)))
         if subtext:
-            toast_body.add_child(Text(subtext, font=get_font(Font.SEGOE_UI, 13), fill=(192, 192, 192, 192)))
+            toast_body.add_child(Text(subtext, font=Font.SEGOE_UI, size=13, fill=(192, 192, 192, 192)))
 
         if image:
             toast_body_new = Row(spacing=16)
@@ -39,7 +38,7 @@ class Notification(View):
 
         self.column.add_child(toast_body)
 
-        self._close = Text("\ue711", font=get_font(Font.SEGOE_MDL2, size=12), fill=(255, 255, 255, 192))
+        self._close = Text("\ue711", font=Font.SEGOE_MDL2, size=12, fill=(255, 255, 255, 192))
         self._close.parent = self
 
     def get_size(self) -> tuple[int, int] | tuple[float, float]:

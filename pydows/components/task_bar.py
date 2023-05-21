@@ -2,7 +2,6 @@ import datetime
 
 from PIL import Image
 from enum import Enum
-from pydows.helpers import get_font
 from pydows.views import Row, View, Text, Image as ImageView
 from pydows.constants import HoloMDL2IconMap, SegoeMDL2IconMap, Font, Color
 
@@ -84,8 +83,7 @@ class TaskBar(View):
             super().__init__()
             self.is_holo = isinstance(icon, HoloMDL2IconMap)
             self.icon = Text(icon.value,
-                             font=get_font(Font.HOLOLENS_MDL2 if self.is_holo else Font.SEGOE_MDL2, size=16)
-                             )
+                             font=Font.HOLOLENS_MDL2 if self.is_holo else Font.SEGOE_MDL2, size=16)
 
         def get_size(self) -> tuple[int, int] | tuple[float, float]:
             return 48, 40
@@ -132,11 +130,11 @@ class TaskBar(View):
             self.notif_slide = 0
             self.icon = Text(
                 SegoeMDL2IconMap.ACTION_CENTER.value,
-                font=get_font(Font.SEGOE_MDL2, size=16)
+                font=Font.SEGOE_MDL2, size=16
             )
             self.icon_notif = Text(
                 SegoeMDL2IconMap.ACTION_CENTER_NOTIFICATION.value,
-                font=get_font(Font.SEGOE_MDL2, size=16)
+                font=Font.SEGOE_MDL2, size=16
             )
 
         def get_size(self) -> tuple[int, int] | tuple[float, float]:
@@ -159,9 +157,9 @@ class TaskBar(View):
     class TimeAndDate(View):
         def __init__(self, time=datetime.datetime.now()):
             super().__init__()
-            font = get_font(Font.SEGOE_UI, 12)
             self.text = Text(time.strftime("%I:%M %p").lstrip('0') + "\n" +
-                             time.strftime("%m/%d/%Y").lstrip('0'), font=font, align="center")
+                             time.strftime("%m/%d/%Y").lstrip('0'),
+                             font=Font.SEGOE_UI, size=12, align="center")
             self.padding = 6
 
         def get_size(self) -> tuple[int, int]:
@@ -189,7 +187,7 @@ class TaskBar(View):
     class TrayIcon(View):
         def __init__(self, icon: SegoeMDL2IconMap):
             super().__init__()
-            self.icon = Text(icon.value, font=get_font(Font.SEGOE_MDL2, 16))
+            self.icon = Text(icon.value, font=Font.SEGOE_MDL2, size=16)
 
         def get_size(self) -> tuple[int, int] | tuple[float, float]:
             return 22, 38
@@ -204,7 +202,7 @@ class TaskBar(View):
     class TrayMore(View):
         def __init__(self):
             super().__init__()
-            self.icon = Text(SegoeMDL2IconMap.CHEVRON_UP_MED.value, font=get_font(Font.SEGOE_MDL2, 12))
+            self.icon = Text(SegoeMDL2IconMap.CHEVRON_UP_MED.value, font=Font.SEGOE_MDL2, size=12)
 
         def get_size(self) -> tuple[int, int] | tuple[float, float]:
             return 24, 40

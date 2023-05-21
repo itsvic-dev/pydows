@@ -1,14 +1,16 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 from .view import View
+from ..constants import Font
+from ..helpers import get_font
 from typing import Literal
 
 
 class Text(View):
-    def __init__(self, text: str, font: ImageFont.ImageFont | ImageFont.FreeTypeFont | None = None,
-                 fill=(255, 255, 255), align: Literal["left", "center", "right"] = "left", anchor: str | None = None):
+    def __init__(self, text: str, font: Font | None = None, size=15, fill=(255, 255, 255),
+                 align: Literal["left", "center", "right"] = "left", anchor: str | None = None):
         super().__init__()
         self.text = text
-        self.font = font
+        self.font = get_font(font, size=size)
         self.fill = fill
         self.align = align
         self.anchor = anchor
