@@ -1,5 +1,4 @@
 from pydows.views import View, Text, Image, Row
-from pydows.helpers import get_font
 from pydows.constants import Font, SegoeMDL2IconMap
 from PIL import Image as PILImage
 
@@ -26,7 +25,7 @@ class Window(View):
             super().__init__()
             if icon:
                 self.icon = Image(icon, (16, 16))
-            self.title = Text(title, font=get_font(Font.SEGOE_UI, 12), fill=(0, 0, 0))
+            self.title = Text(title, font=Font.SEGOE_UI, size=12, fill=(0, 0, 0))
 
             self.buttons = Row(spacing=1)
             if not popup:
@@ -37,7 +36,7 @@ class Window(View):
         class Button(View):
             def __init__(self, icon: SegoeMDL2IconMap, popup=False):
                 super().__init__()
-                self.icon = Text(icon.value, font=get_font(Font.SEGOE_MDL2, 10), fill=(0, 0, 0))
+                self.icon = Text(icon.value, font=Font.SEGOE_MDL2, size=10, fill=(0, 0, 0))
                 self.popup = popup
 
             def get_size(self) -> tuple[int, int] | tuple[float, float]:

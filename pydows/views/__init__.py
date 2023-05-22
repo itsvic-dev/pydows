@@ -9,3 +9,4 @@ from .column import Column
 
 from .layered_view import LayeredView
 from .acrylic import Acrylic
+from .shadow import Shadow
