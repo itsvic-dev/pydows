@@ -56,7 +56,7 @@ class TaskBar(View):
         show_desktop_width = 5
         show_desktop_gap = 8
         x_offset = size[0] - show_desktop_width
-        image.alpha_composite(Image.new("RGBA", (1, 40), color=(128, 128, 128, 192)), (x_offset, 0))
+        image.alpha_composite(Image.new("RGBA", (1, 40), color=(192, 192, 192, 128)), (x_offset, 0))
         x_offset -= show_desktop_gap
 
         self.action_center.notif_slide = self.notif_slide
@@ -159,7 +159,7 @@ class TaskBar(View):
             super().__init__()
             self.text = Text(time.strftime("%I:%M %p").lstrip('0') + "\n" +
                              time.strftime("%m/%d/%Y").lstrip('0'),
-                             font=Font.SEGOE_UI, size=12, align="center")
+                             font=Font.SEGOE_UI_SEMIBOLD, size=12, align="center")
             self.padding = 6
 
         def get_size(self) -> tuple[int, int]:
